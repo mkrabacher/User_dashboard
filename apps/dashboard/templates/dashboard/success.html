@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Log & Reg | Success | Welcome {{user.fName}} {{user.lName}}</title>
+</head>
+<body>
+    <div id="navbar">
+        <h3 class="nav-obj">Social Dashboard</h3>||
+        <a href="/" class="nav-btn">Home</a>||
+        {%if request.session.curr_user_id == 'none'%}
+        <a href="/register/" class="nav-btn">Register</a>||
+        <a href="/signin/" class="nav-btn">Sign In</a>||
+        {%else%}
+        <h4 class="nav-obj">Welcome {{curr_user.fName}} {{curr_user.lName}}</h4>||
+        <a href="/dashboard/all" class="nav-btn">Find Users</a>||
+        <a href="/users/{{curr_user.id}}/edit" class="nav-btn">Profile</a>||
+        <a href="/dashboard/show/{{curr_user.id}}" class="nav-btn">My Dashboard</a>||
+        <a href="/logout" class="nav-btn">Sign Out</a>||
+        {%endif%}
+    </div>
+    <hr>
+    <h1>Success | Welcome {{curr_user.fName}} {{curr_user.lName}}</h1>
+
+    <table>
+        <thead>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>birthday</th>
+            <th>password</th>
+        </thead>
+        <tbody>
+            {%for user in users%}
+            <tr>
+                <td>{{user.fName}}</td>
+                <td>{{user.lName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.birthday}}</td>
+                <td>{{user.password}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>

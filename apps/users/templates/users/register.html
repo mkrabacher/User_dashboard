@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+</head>
+<body>
+    <div id="navbar">
+        <h3 class="nav-obj">Social Dashboard</h3>||
+        <a href="/" class="nav-btn">Home</a>||
+        {%if request.session.curr_user_id == 'none'%}
+        <a href="/register/" class="nav-btn">Register</a>||
+        <a href="/signin/" class="nav-btn">Sign In</a>||
+        {%else%}
+        <h4 class="nav-obj">Welcome {{curr_user.fName}} {{curr_user.lName}}</h4>||
+        <a href="/dashboard/all" class="nav-btn">Find Users</a>||
+        <a href="/users/{{curr_user.id}}/edit" class="nav-btn">Profile</a>||
+        <a href="/dashboard/show/{{curr_user.id}}" class="nav-btn">My Dashboard</a>||
+        <a href="/logout" class="nav-btn">Sign Out</a>||
+        {%endif%}
+    </div>
+    <hr>
+    <h1>Register</h1>
+    {%for message in messages%}
+    <li>{{message}}</li>
+    {%endfor%}
+    <form action="/registerUser" method="post">
+        {%csrf_token%}
+        <label for="fName">First Name:
+            <input type="text" name="fName" id="fName">
+        </label>
+        <br>
+        <br>
+        <label for="lName">Last Name
+            <input type="text" name="lName" id="lName">
+        </label>
+        <br>
+        <br>
+        <label for="email">Email:
+            <input type="text" name="email" id="email">
+        </label>
+        <br>
+        <br>
+        <label for="birthday">Birthday:
+            <input type="date" name="birthday" id="birthday" required>
+        </label>
+        <br>
+        <br>
+        <label for="password">Password:
+            <input type="password" name="password" id="password">
+        </label>
+        <br>
+        <br>
+        <label for="pw_conf">Confirm Password:
+            <input type="password" name="pw_conf" id="pw_conf">
+        </label>
+        <br>
+        <br>
+        <input type="submit" value="Register">
+    </form>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edit User</title>
+</head>
+<body>
+    <div id="navbar">
+        <h3 class="nav-obj">Social Dashboard</h3>||
+        <a href="/" class="nav-btn">Home</a>||
+        {%if request.session.curr_user_id == 'none'%}
+        <a href="/register/" class="nav-btn">Register</a>||
+        <a href="/signin/" class="nav-btn">Sign In</a>||
+        {%else%}
+        <h4 class="nav-obj">Welcome {{curr_user.fName}} {{curr_user.lName}}</h4>||
+        <a href="/dashboard/all" class="nav-btn">Find Users</a>||
+        <a href="/users/{{curr_user.id}}/edit" class="nav-btn">Profile</a>||
+        <a href="/dashboard/show/{{curr_user.id}}" class="nav-btn">My Dashboard</a>||
+        <a href="/logout" class="nav-btn">Sign Out</a>||
+        {%endif%}
+    </div>
+    <hr>
+    <h1>Edit {{user.fName}}'s profile</h1>
+
+    <div>
+        <h4>Edit Info</h4>
+        <form action="/users/updateInfo/" method="post">
+            {%csrf_token%}
+            <label for="fName">First Name: <br>
+                <input type="text" name="fName" value="{{user.fName}}"><br><br>
+            </label>
+            <label for="lName">Last Name: <br>
+                <input type="text" name="lName" value="{{user.lName}}"><br><br>
+            </label>
+            <label for="email">Email Address: <br>
+                <input type="text" name="email" value="{{user.email}}"><br><br>
+            </label>
+            <label for="birthday">Birthdate: <br>
+                <input type="text" name="birthday" value="{{user.birthday}}"><br><br>
+            </label>
+            <label for="fName">New Password: <br>
+                <input type="password" name="password"><br><br>
+            </label>
+            <label for="lName">New Password Confirmation: <br>
+                <input type="password" name="pw_conf"><br><br>
+            </label>
+            <h4>Edit Description</h4>
+            <textarea name="desc" cols="50" rows="7" placeholder="Write something about yourself..." value='{{user.desc}}'></textarea><br><br>
+            <input type="submit" value="Save"><br><br>
+        </form>
+    </div>
+</body>
+</html>
