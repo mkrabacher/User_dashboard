@@ -31,7 +31,46 @@
         <p>Birthdate: {{user.birthday}}</p>
         <p>About Me: {{user.desc}}</p>
     </div>
-
+        <!-- Everything below is untested -->
+    <div>
+        {%if user.id == request.session.curr_user_id%}
+        <h1>Your Dashboard</h1>
+        {%else%}
+        <h1>{{user.fName}}'s Dashboard</h1>
+        {%endif%}
+        <div class="post">
+            <form action="/dashboard/createPost/" method="post">
+                {%csrf_token%}
+                <textarea name="post" cols="70" rows="4" placeholder="write a message to {{user.fName}}..."></textarea><br>
+                <input type="hidden" name="receiver_id" value="{{user.id}}">
+                <input type="hidden" name="poster_id" value="{{curr_user.id}}">
+                <input type="submit" value="Post message">
+            </form>
+        </div>
+        
+        {%for post in user.posts_received.all%}
+        <div class="post">
+            <p><strong><a href="/dashboard/show/{{post.post_maker.id}}" class="nav-btn">{{post.post_maker.fName}} {{post.post_maker.lName}}</a> - {{post.updated_at}}</strong></p>
+            <p>{{post.content}}</p>
+        </div>
+            {%for comment in post.comments.all%}
+            <div class="comment">
+                <p><strong><a href="/dashboard/show/{{comment.comment_maker.id}}" class="nav-btn">--{{comment.comment_maker.fName}} {{comment.comment_maker.lName}}</a> - {{comment.updated_at}}</strong></p>
+                <p>--{{comment.content}}</p>
+            </div>
+            {%endfor%}
+        
+        <div class="comment">
+            <form action="/dashboard/createComment/" method="post">
+                {%csrf_token%}
+                <textarea name="comment" cols="50" rows="4" placeholder="comment on this..."></textarea><br>
+                <input type="hidden" name="post_id" value="{{post.id}}">
+                <input type="hidden" name="commenter_id" value="{{curr_user.id}}">
+                <input type="submit" value="Comment">
+            </form>
+        </div>
+        {%endfor%}
+    </div>
 
 </body>
 </html>
