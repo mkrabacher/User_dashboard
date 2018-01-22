@@ -30,40 +30,45 @@
         </div>
     </div>
 
+    <div id="content">
 
-    <h1>Sign In:</h1>
-    <form action="/users/login" method="post">
-        {%csrf_token%}
-        <label for="email">Email:
-            <input type="text" name="email">
-        </label>
-        <label for="password">Password:
-            <input type="password" name="password">
-        </label>
-        <input type="submit" value="Login">
-    </form>
-    <hr>
-
-    <table>
-        <thead>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>birthday</th>
-            <th>password</th>
-        </thead>
-        <tbody>
-            {%for user in users%}
-            <tr>
-                <td>{{user.fName}}</td>
-                <td>{{user.lName}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.birthday}}</td>
-                <td>{{user.password}}</td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
+        <h1>Sign In:</h1>
+        <form action="/users/login" method="post">
+            {%csrf_token%}
+            <label for="email">Email:
+                <input type="text" name="email">
+            </label>
+            <label for="password">Password:
+                <input type="password" name="password">
+            </label>
+            <input type="submit" value="Login">
+        </form><br>
+        {%for message in messages%}
+        <text class="errMsg">{{message}}</text>
+        {%endfor%}
+    </div>
+    <div id="content">
+        <table>
+            <thead>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>birthday</th>
+                <th>password</th>
+            </thead>
+            <tbody>
+                {%for user in users%}
+                <tr>
+                    <td>{{user.fName}}</td>
+                    <td>{{user.lName}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.birthday}}</td>
+                    <td>{{user.password}}</td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

@@ -29,44 +29,47 @@
             {%endif%}
         </div>
     </div>
-    <h1>Register</h1>
-    {%for message in messages%}
-    <li>{{message}}</li>
-    {%endfor%}
-    <form action="/registerUser" method="post">
-        {%csrf_token%}
-        <label for="fName">First Name:
-            <input type="text" name="fName" id="fName">
-        </label>
-        <br>
-        <br>
-        <label for="lName">Last Name
-            <input type="text" name="lName" id="lName">
-        </label>
-        <br>
-        <br>
-        <label for="email">Email:
-            <input type="text" name="email" id="email">
-        </label>
-        <br>
-        <br>
-        <label for="birthday">Birthday:
-            <input type="date" name="birthday" id="birthday" required>
-        </label>
-        <br>
-        <br>
-        <label for="password">Password:
-            <input type="password" name="password" id="password">
-        </label>
-        <br>
-        <br>
-        <label for="pw_conf">Confirm Password:
-            <input type="password" name="pw_conf" id="pw_conf">
-        </label>
-        <br>
-        <br>
-        <input type="submit" value="Register">
-    </form>
+
+    <div id="content">
+        <h1>Register</h1>
+        <form action="/registerUser" method="post">
+            {%csrf_token%}
+            <label for="fName">First Name:
+                <input type="text" name="fName" id="fName">
+            </label>
+            <br>
+            <br>
+            <label for="lName">Last Name
+                <input type="text" name="lName" id="lName">
+            </label>
+            <br>
+            <br>
+            <label for="email">Email:
+                <input type="text" name="email" id="email">
+            </label>
+            <br>
+            <br>
+            <label for="birthday">Birthday:
+                <input type="date" name="birthday" id="birthday" required>
+            </label>
+            <br>
+            <br>
+            <label for="password">Password:
+                <input type="password" name="password" id="password">
+            </label>
+            <br>
+            <br>
+            <label for="pw_conf">Confirm Password:
+                <input type="password" name="pw_conf" id="pw_conf">
+            </label>
+            <br>
+            <br>
+            <input type="submit" value="Register">
+        </form>
+        {%for message in messages%}
+        <text class="errMsg">{{message}}</text class="errMsg"><br>
+        {%endfor%}
+    </div>
 </body>
 
 </html>

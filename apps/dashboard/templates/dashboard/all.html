@@ -29,31 +29,42 @@
             {%endif%}
         </div>
     </div>
+    <div id="content">
 
-    <h1>All Users</h1>
+        <h1>All Users</h1>
 
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Registered On</th>
-            <th>Admin Privileges?</th>
-        </thead>
-        <tbody>
-            {%for user in users%}
-            <tr>
-                <td>{{user.id}}</td>
-                <td>
-                    <a href="/dashboard/show/{{user.id}}" class="nav-btn">{{user.fName}} {{user.lName}}</a>
-                </td>
-                <td>{{user.email}}</td>
-                <td>{{user.created_at}}</td>
-                <td>{{user.admin}}</td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
+        <table>
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Registered On</th>
+                {%if curr_user.level == 'admin'%}
+                <th>Admin Privileges?</th>
+                <th>Actions</th>
+                {%endif%}
+            </thead>
+            <tbody>
+                {%for user in users%}
+                <tr>
+                    <td>{{user.id}}</td>
+                    <td>
+                        <a href="/dashboard/show/{{user.id}}">{{user.fName}} {{user.lName}}</a>
+                    </td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.created_at}}</td>
+                    {%if curr_user.level == 'admin'%}
+                    <td>{{user.level}}</td>
+                    <td>
+                        <form style="display:inline-block" action="/adminDel/{{user.id}}" method="get">{%csrf_token%}<input type="submit" value="Delete"></form>
+                        <form style="display:inline-block" action="/adminEdit/{{user.id}}" method="get">{%csrf_token%}<input type="submit" value="Edit"></form>
+                    </td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

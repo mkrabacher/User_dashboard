@@ -29,8 +29,30 @@
             {%endif%}
         </div>
     </div>
-    <h1>Here's what the world is saying.</h1>
-    <!-- all posts w/ comments displayed here. -->
+    <div id="content">
+        <h1>Here's what the world is saying.</h1>
+
+    </div>
+    <div id="content">
+
+        {%for post in posts%}
+        <p class="postTitle">
+            <strong>
+                <a href="/dashboard/show/{{post.post_maker.id}}">{{post.post_maker.fName}} {{post.post_maker.lName}}</a> - {{post.updated_at}}</strong>
+        </p>
+        <div class="post">
+            <p>{{post.content}}</p>
+        </div>
+        {%for comment in post.comments.all%}
+        <p class="commentTitle">
+            <strong>
+                <a href="/dashboard/show/{{comment.comment_maker.id}}">{{comment.comment_maker.fName}} {{comment.comment_maker.lName}}</a> - {{comment.updated_at}}</strong>
+        </p>
+        <div class="comment">
+            <p>{{comment.content}}</p>
+        </div>
+        {%endfor%} {%endfor%}
+    </div>
 </body>
 
 </html>

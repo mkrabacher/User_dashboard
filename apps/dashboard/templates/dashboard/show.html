@@ -37,9 +37,12 @@
         <p>Email: {{user.email}}</p>
         <p>Birthdate: {{user.birthday}}</p>
         <p>About Me: {{user.desc}}</p>
+        {%for message in messages%}
+        <text class="errMsg">{{message}}</text class="errMsg"><br>
+        {%endfor%}
     </div>
 
-    <div id="dashboard">
+    <div id="content">
         {%if user.id == request.session.curr_user_id%}
         <h1>Your Dashboard</h1>
         {%else%}
