@@ -8,7 +8,10 @@ from ..users.models import *
 from models import *
 
 def index(request):
-	return render(request, 'dashboard/index.html')
+	context = {
+		'curr_user':User.objects.get(id=request.session['curr_user_id'])
+	}
+	return render(request, 'dashboard/index.html', context)
 
 def success(request):
     if request.session['curr_user_id'] != 'none':

@@ -1,27 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="{% static 'dashboard/style.css' %}" />
     <title>Log & Reg | Success | Welcome {{user.fName}} {{user.lName}}</title>
 </head>
+
 <body>
     <div id="navbar">
-        <h3 class="nav-obj">Social Dashboard</h3>||
-        <a href="/" class="nav-btn">Home</a>||
-        {%if request.session.curr_user_id == 'none'%}
-        <a href="/register/" class="nav-btn">Register</a>||
-        <a href="/signin/" class="nav-btn">Sign In</a>||
-        {%else%}
-        <h4 class="nav-obj">Welcome {{curr_user.fName}} {{curr_user.lName}}</h4>||
-        <a href="/dashboard/all" class="nav-btn">Find Users</a>||
-        <a href="/users/{{curr_user.id}}/edit" class="nav-btn">Profile</a>||
-        <a href="/dashboard/show/{{curr_user.id}}" class="nav-btn">My Dashboard</a>||
-        <a href="/logout" class="nav-btn">Sign Out</a>||
-        {%endif%}
+        <div class="nav-obj">
+            <h2>Social Dashboard</h2>
+            <a class="nav-btn" style="border-left: 3px solid #535353;" href="/" class="nav-btn">Home</a>
+            <a class="nav-btn" href="/dashboard/all" class="nav-btn">Find Users</a>
+        </div>
+        <div id='nav-btns'>
+            {%if request.session.curr_user_id == 'none'%}
+            <a class="nav-btn" style="border-left: 3px solid #535353;" href="/register/" class="nav-btn">Register</a>
+            <a class="nav-btn" href="/signin/" class="nav-btn">Sign In</a>
+            {%else%}
+            <h4 class="nav-obj">Welcome {{curr_user.fName}} {{curr_user.lName}}</h4>
+            <a class="nav-btn" style="border-left: 3px solid #535353;" href="/users/{{curr_user.id}}/edit" class="nav-btn">My Profile</a>
+            <a class="nav-btn" href="/dashboard/show/{{curr_user.id}}" class="nav-btn">My Dashboard</a>
+            <a class="nav-btn" href="/logout" class="nav-btn">Sign Out</a>
+            {%endif%}
+        </div>
     </div>
-    <hr>
     <h1>Success | Welcome {{curr_user.fName}} {{curr_user.lName}}</h1>
 
     <table>
@@ -45,4 +52,5 @@
         </tbody>
     </table>
 </body>
+
 </html>
